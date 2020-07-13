@@ -62,20 +62,14 @@ public class registration_page {
 		submit.click();
 	}
 	
-	public void status(){
-		if(status.getText().contentEquals("Your Account Has Been Created!")){
-			System.out.println("Account Created");
-		}
-		else{
-			System.out.print("Account Createation Failed due to :"+failed_status.getText());
-	
-		}
+	public String registration_status(){
+		return status.getText();
 	}
 	
-	public void password_status(){
-		if(password_status.getText().contentEquals("Password confirmation does not match password!")){
-			System.out.println("Account Createation Failed due to :"+password_status.getText());
-		}
-	}
+//	public void password_status(){
+//		if(password_status.getText().contentEquals("Password confirmation does not match password!")){
+//			System.out.println("Account Createation Failed due to :"+password_status.getText());
+//		}
+//	}
 
 }

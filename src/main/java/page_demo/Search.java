@@ -15,6 +15,11 @@ public class Search {
 	
 	@FindBy(xpath="//INPUT[@type='text']") public WebElement search_input;
 	@FindBy(xpath="//*[@id='search']/span/button") public WebElement search_btn;
+	@FindBy(css="#content > div.row > div:nth-child(1) > div > div.image > a") public WebElement product_check;
+	@FindBy(css="#content > div:nth-child(8) > div:nth-child(1) > div > div:nth-child(2) > div.caption > h4 > a") public WebElement product_detail_link;
+	@FindBy(css="#content > div > div.col-sm-4 > div.btn-group > button:nth-child(1)") public WebElement wish_btn;
+	@FindBy(xpath="//*[@id='product-product']/div[1]/a[1]") public WebElement login_status;
+	@FindBy(xpath="//*[@id='product-product']/div[1]") public WebElement wish_status;// Success: You have added 
 	
 	public void type_search_value(String input_value){
 		search_input.sendKeys(input_value);
@@ -22,6 +27,26 @@ public class Search {
 	
 	public void click_search_btn(){
 		search_btn.click();
+	}
+	
+	public boolean product_status(){
+		return product_check.isDisplayed();
+	}
+	
+	public void click_product_detail_link(){
+		product_detail_link.click();
+	}
+	
+	public void click_wish_btn(){
+		wish_btn.click();
+	}
+	
+	public boolean login_status(){
+		return login_status.isDisplayed();
+	}
+	
+	public String wish_status(){
+		return wish_status.getText();
 	}
 
 }

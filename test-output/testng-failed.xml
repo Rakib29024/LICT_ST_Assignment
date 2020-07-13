@@ -6,8 +6,9 @@
       <class name="testng01.list_lestng.apptest">
         <methods>
           <include name="after"/>
-          <include name="file_upload_test"/>
+          <include name="varify_search_to_wishlist_test"/>
           <include name="before"/>
+          <include name="login_test"/>
         </methods>
       </class> <!-- testng01.list_lestng.apptest -->
     </classes>

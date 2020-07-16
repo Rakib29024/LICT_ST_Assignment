@@ -28,6 +28,7 @@ public class apptest{
 	public String username;
 	public String email;
 	public String password;
+	public String product;
 	data_access test_data;
 
 	@BeforeTest
@@ -36,6 +37,9 @@ public class apptest{
 		driver=new ChromeDriver();
 		test_data=new data_access();
 		url=test_data.property.getProperty("url");
+		product=test_data.property.getProperty("product");
+		email=test_data.property.getProperty("email");
+		password=test_data.property.getProperty("password");
 		
 	}
 	
@@ -51,8 +55,7 @@ public class apptest{
 		System.out.println("Registeration-Test-started");
 		
 		username=test_data.property.getProperty("username");
-		email=test_data.property.getProperty("email");
-		password=test_data.property.getProperty("password");
+
 		
 		register_fun(driver,username,email,password,password);
 		
@@ -72,14 +75,55 @@ public class apptest{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		System.out.println("Login-Test-started");
 		
-		email=test_data.property.getProperty("email");
-		password=test_data.property.getProperty("password");
+//		email=test_data.property.getProperty("email");
+//		password=test_data.property.getProperty("password");
 		login(driver,email,password);
 		
 //		driver.quit();
 	}
 	
 	@Test(priority=3)
+	public void varify_product_search_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Search-Test-started");
+
+		Search home=new Search(driver);
+		Thread.sleep(3000);
+		home.type_search_value(product);
+		Thread.sleep(3000);
+		home.click_search_btn();
+		boolean product_status=home.product_status();
+		Assert.assertEquals(product_status, true);
+	}
+	
+	@Test(priority=4)
+	public void varify_product_view_test() throws InterruptedException{
+		
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Search-Test-started");
+
+		Search home=new Search(driver);
+		Thread.sleep(3000);
+		home.type_search_value(product);
+		Thread.sleep(3000);
+		home.click_search_btn();
+
+		home.click_product_detail_link();
+		
+		String view_status=home.view_status();
+		Assert.assertEquals(view_status, product);
+	}
+	
+	
+	@Test(priority=5)
 	public void varify_search_to_wishlist_test() throws InterruptedException{
 		
 
@@ -92,11 +136,9 @@ public class apptest{
 
 		Search home=new Search(driver);
 		Thread.sleep(3000);
-		home.type_search_value("iPhone");
+		home.type_search_value(product);
 		Thread.sleep(3000);
 		home.click_search_btn();
-		boolean product_status=home.product_status();
-		Assert.assertEquals(product_status, true);
 
 		home.click_product_detail_link();
 		home.click_wish_btn();
@@ -108,9 +150,34 @@ public class apptest{
 //			password=test_data.property.getProperty("password");
 //			login(driver,email,password);
 //		}
-		Assert.assertEquals(wish_status, " Success: You have added ");
+		Assert.assertEquals(wish_status, product);
 //		String email="datatest"+RandomStringUtils.randomAlphanumeric(5)+"@gamil.com";
 //		driver.quit();
+	}
+	
+	@Test(priority=6)
+	public void varify_search_to_add_to_cart_test() throws InterruptedException{
+		
+
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Search-Test-started");
+
+		Search home=new Search(driver);
+		Thread.sleep(3000);
+		home.type_search_value(product);
+		Thread.sleep(3000);
+		home.click_search_btn();
+
+		home.click_product_detail_link();
+		
+		home.click_add_to_cart_btn();
+		String add_status=home.add_status();
+		
+		Assert.assertEquals(add_status, "product");
 	}
 	
 //	@Test
@@ -185,7 +252,6 @@ public class apptest{
 		Thread.sleep(3000);
 		System.out.println("Test-closed");
 		driver.quit();
-		driver.close();
 
 	}
 	

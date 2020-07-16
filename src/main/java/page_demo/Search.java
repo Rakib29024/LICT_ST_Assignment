@@ -19,7 +19,11 @@ public class Search {
 	@FindBy(css="#content > div:nth-child(8) > div:nth-child(1) > div > div:nth-child(2) > div.caption > h4 > a") public WebElement product_detail_link;
 	@FindBy(css="#content > div > div.col-sm-4 > div.btn-group > button:nth-child(1)") public WebElement wish_btn;
 	@FindBy(xpath="//*[@id='product-product']/div[1]/a[1]") public WebElement login_status;
-	@FindBy(xpath="//*[@id='product-product']/div[1]") public WebElement wish_status;// Success: You have added 
+	@FindBy(xpath="//*[@id='content']/div[1]/div[2]/h1") public WebElement view_status;//
+	@FindBy(xpath="//*[@id='product-product']/div[1]/a[1]") public WebElement wish_status;// Success: You have added 
+	@FindBy(xpath="//*[@id='button-cart']") public WebElement add_to_cart_btn;
+	@FindBy(xpath="//*[@id='product-product']/div[1]/a[1]") public WebElement add_status;
+	
 	
 	public void type_search_value(String input_value){
 		search_input.sendKeys(input_value);
@@ -41,8 +45,20 @@ public class Search {
 		wish_btn.click();
 	}
 	
+	public void click_add_to_cart_btn(){
+		add_to_cart_btn.click();
+	}
+	
 	public boolean login_status(){
 		return login_status.isDisplayed();
+	}
+	
+	public String view_status(){
+		return view_status.getText();
+	}
+	
+	public String add_status(){
+		return add_status.getText();
 	}
 	
 	public String wish_status(){

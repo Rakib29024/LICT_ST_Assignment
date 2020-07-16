@@ -5,10 +5,11 @@
     <classes>
       <class name="testng01.list_lestng.apptest">
         <methods>
+          <include name="varify_registration_pos_test"/>
           <include name="after"/>
+          <include name="varify_search_to_add_to_cart_test"/>
           <include name="varify_search_to_wishlist_test"/>
           <include name="before"/>
-          <include name="login_test"/>
         </methods>
       </class> <!-- testng01.list_lestng.apptest -->
     </classes>

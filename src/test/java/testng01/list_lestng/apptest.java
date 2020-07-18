@@ -25,10 +25,13 @@ public class apptest{
 	
 	public WebDriver driver;
 	public String url;
-	public String username;
+	public String name;
+	public String fname;
 	public String email;
+	public String phone;
 	public String password;
 	public String product;
+	public boolean agree;
 	data_access test_data;
 
 	@BeforeTest
@@ -38,13 +41,154 @@ public class apptest{
 		test_data=new data_access();
 		url=test_data.property.getProperty("url");
 		product=test_data.property.getProperty("product");
+		name=test_data.property.getProperty("name");
+		fname=test_data.property.getProperty("fname");
 		email=test_data.property.getProperty("email");
+		phone=test_data.property.getProperty("phone");
 		password=test_data.property.getProperty("password");
 		
 	}
 	
-
+	
 	@Test(priority=1)
+	public void varify_registration_no_firstname_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,"",name,email,phone,password,password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.fname_status(), "First Name must be between 1 and 32 characters!");
+		
+	}
+	
+	@Test(priority=2)
+	public void varify_registration_no_lastname_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,"",email,phone,password,password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.name_status(), "Last Name must be between 1 and 32 characters!");
+		
+	}
+	
+	@Test(priority=3)
+	public void varify_registration_no_email_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,"",phone,password,password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.email_error_status(), "E-Mail Address does not appear to be valid!");
+		
+	}
+	
+	
+	@Test(priority=4)
+	public void varify_registration_no_phone_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,email,"",password,password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.phone_error_status(), "Telephone must be between 3 and 32 characters!");
+		
+	}
+	
+	@Test(priority=5)
+	public void varify_registration_no_password_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,email,phone,"",password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.password_error_status(), "Password must be between 4 and 20 characters!");
+		
+	}
+	
+	@Test(priority=6)
+	public void varify_registration_no_matching_password_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,email,phone,password,"000000",true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.matching_password_error_status(), "Password confirmation does not match password!");
+		
+	}
+	
+	@Test(priority=7)
+	public void varify_registration_no_privacy_check_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,email,phone,password,"000000",false);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.privacy_error_status(),  "Warning: You must agree to the Privacy Policy!");
+		
+	}
+	
+	@Test(priority=8)
+	public void varify_registration_duplicate_email_test() throws InterruptedException{
+		driver.get(url);
+		System.out.println("Link Opened");
+		driver.manage().window().maximize();
+		System.out.println("Max Window Size");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("Registeration-Test-started");
+		
+		
+		register_fun(driver,fname,name,"unknown101010@hotmail.com",phone,password,password,true);
+		
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.demail_error_status(), "Warning: E-Mail Address is already registered!");
+		
+	}
+	
+
+	@Test(priority=9)
 	public void varify_registration_pos_test() throws InterruptedException{
 		System.out.println(url);
 		driver.get(url);
@@ -54,16 +198,22 @@ public class apptest{
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		System.out.println("Registeration-Test-started");
 		
-		username=test_data.property.getProperty("username");
-
+		register_fun(driver,fname,name,email,phone,password,password,true);
 		
-		register_fun(driver,username,email,password,password);
+		registration_page register=new registration_page(driver);
+		Assert.assertEquals(register.registration_status(), "Your Account Has Been Created!");
+		
+		time(1);
+		register.click_account_dd_btn();
+		time(1);
+		register.click_logout_btn();
+		time(1);
 		
 //		driver.quit();
 		
 	}
 	
-	@Test(priority=2)
+	@Test(priority=10)
 	public void login_test() throws InterruptedException{
 		System.out.println(url);
 		driver.get(url);
@@ -82,7 +232,7 @@ public class apptest{
 //		driver.quit();
 	}
 	
-	@Test(priority=3)
+	@Test(priority=11)
 	public void varify_product_search_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
@@ -100,7 +250,7 @@ public class apptest{
 		Assert.assertEquals(product_status, true);
 	}
 	
-	@Test(priority=4)
+	@Test(priority=12)
 	public void varify_product_view_test() throws InterruptedException{
 		
 		driver.get(url);
@@ -123,7 +273,7 @@ public class apptest{
 	}
 	
 	
-	@Test(priority=5)
+	@Test(priority=13)
 	public void varify_search_to_wishlist_test() throws InterruptedException{
 		
 
@@ -155,7 +305,7 @@ public class apptest{
 //		driver.quit();
 	}
 	
-	@Test(priority=6)
+	@Test(priority=14)
 	public void varify_search_to_add_to_cart_test() throws InterruptedException{
 		
 
@@ -180,20 +330,7 @@ public class apptest{
 		Assert.assertEquals(add_status, "product");
 	}
 	
-//	@Test
-//	public void varify_registration_neg_email_test() throws InterruptedException{
-//		driver.get(url);
-//		System.out.println("Link Opened");
-//		driver.manage().window().maximize();
-//		System.out.println("Max Window Size");
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//		System.out.println("Registeration-Test-started");
-//		
-//		
-//		register_fun(driver,"Unkown1","unknown1234567@hotmail.com","12345","12345");
-//		driver.quit();
-//		
-//	}
+
 //	
 //	@Test
 //	public void varify_registration_neg_password_test() throws InterruptedException{
@@ -278,35 +415,36 @@ public class apptest{
 		Assert.assertEquals(login_status, "My Account");
 	}
 	
-	public static void register_fun(WebDriver driver,String name,String email,String password,String confirm) throws InterruptedException{
+	public static void register_fun(WebDriver driver,String fname,String name,String email,String phone,String password,String confirm, boolean agree) throws InterruptedException{
 		
+
 		registration_page register=new registration_page(driver);
 		
 
-		Thread.sleep(3000);
+		time(1);
 		register.click_account_dd_btn();
-		Thread.sleep(3000);
+		time(1);
 		register.click_register_link_btn();
-		Thread.sleep(3000);
-		register.firstname("MR.");
-		Thread.sleep(3000);
+		time(1);
+		register.firstname(fname);
+		time(1);
 		register.lastname(name);
-		Thread.sleep(3000);
+		time(1);
 		register.email(email);
-		Thread.sleep(3000);
-		register.telephone("01770000000");
-		Thread.sleep(3000);
+		time(1);
+		register.telephone(phone);
+		time(1);
 		register.password(password);
-		Thread.sleep(3000);
+		time(1);
 		register.confirm(confirm);
-		Thread.sleep(3000);
-		register.agree();
-		Thread.sleep(3000);
+		time(1);
+		if(agree){
+			register.agree();
+			time(1);
+		}
 		register.submit();
-		Thread.sleep(3000);
-		String registration_status=register.registration_status();
-		Assert.assertEquals(registration_status, "Your Account Has Been Created!");
-//		register.password_status();
+		time(1);
+
 		
 	}
 }

@@ -26,6 +26,18 @@ public class registration_page {
 	@FindBy(xpath="//*[@id='content']/h1") public WebElement status;
 	@FindBy(xpath="//*[@id='account-register']/div[1]") public WebElement failed_status;
 	@FindBy(xpath="//*[@id='content']/form/fieldset[2]/div[2]/div/div") public WebElement password_status;
+	@FindBy(xpath="//*[@id='top-links']/ul/li[2]/ul/li[5]/a") public WebElement logout_link;
+	
+	
+	@FindBy(xpath="//*[@id='account']/div[2]/div/div") public WebElement fname_error;
+	@FindBy(xpath="//*[@id='account']/div[3]/div/div") public WebElement name_error;
+	@FindBy(xpath="//*[@id='account']/div[4]/div/div") public WebElement email_error;
+	@FindBy(xpath="//*[@id='account-register']/div[1]") public WebElement demail_error;
+	@FindBy(xpath="//*[@id='account']/div[5]/div/div") public WebElement phone_error;
+	@FindBy(xpath="//*[@id='content']/form/fieldset[2]/div[1]/div/div") public WebElement password_error;
+	@FindBy(xpath="//*[@id='content']/form/fieldset[2]/div[2]/div/div") public WebElement matching_password_error;
+	@FindBy(xpath="//*[@id='account-register']/div[1]") public WebElement privacy_error;
+	
 	
 	public void home(){
 		home.click();
@@ -35,6 +47,9 @@ public class registration_page {
 	}
 	public void click_register_link_btn(){
 		register_link.click();
+	}
+	public void click_logout_btn(){
+		logout_link.click();
 	}
 //	form
 	public void firstname(String value){
@@ -66,6 +81,37 @@ public class registration_page {
 		return status.getText();
 	}
 	
+	public String fname_status(){
+		return fname_error.getText();
+	}
+	
+	public String name_status(){
+		return name_error.getText();
+	}
+	
+	public String email_error_status(){
+		return email_error.getText();
+	}
+	
+	public String demail_error_status(){
+		return demail_error.getText();
+	}
+	
+	public String phone_error_status(){
+		return phone_error.getText();
+	}
+	
+	public String password_error_status(){
+		return password_error.getText();
+	}
+	
+	public String matching_password_error_status(){
+		return matching_password_error.getText();
+	}
+	
+	public String privacy_error_status(){
+		return privacy_error.getText();
+	}
 //	public void password_status(){
 //		if(password_status.getText().contentEquals("Password confirmation does not match password!")){
 //			System.out.println("Account Createation Failed due to :"+password_status.getText());

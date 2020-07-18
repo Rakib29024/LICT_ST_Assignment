@@ -101,7 +101,6 @@ public class apptest{
 		
 	}
 	
-	
 	@Test(priority=4)
 	public void varify_registration_no_phone_test() throws InterruptedException{
 		driver.get(url);
@@ -187,7 +186,6 @@ public class apptest{
 		
 	}
 	
-
 	@Test(priority=9)
 	public void varify_registration_pos_test() throws InterruptedException{
 		System.out.println(url);
@@ -271,7 +269,6 @@ public class apptest{
 		String view_status=home.view_status();
 		Assert.assertEquals(view_status, product);
 	}
-	
 	
 	@Test(priority=13)
 	public void varify_search_to_wishlist_test() throws InterruptedException{
@@ -391,7 +388,6 @@ public class apptest{
 		driver.quit();
 
 	}
-	
 	
 	//functions
 	public static void time(int t) throws InterruptedException{

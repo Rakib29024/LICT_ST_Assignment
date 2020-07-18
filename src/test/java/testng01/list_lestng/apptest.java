@@ -51,7 +51,7 @@ public class apptest{
 	
 	
 	@Test(priority=1)
-	public void varify_registration_no_firstname_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_firstname_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -68,7 +68,7 @@ public class apptest{
 	}
 	
 	@Test(priority=2)
-	public void varify_registration_no_lastname_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_lastname_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -85,7 +85,7 @@ public class apptest{
 	}
 	
 	@Test(priority=3)
-	public void varify_registration_no_email_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_email_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -102,7 +102,7 @@ public class apptest{
 	}
 	
 	@Test(priority=4)
-	public void varify_registration_no_phone_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_phone_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -119,7 +119,7 @@ public class apptest{
 	}
 	
 	@Test(priority=5)
-	public void varify_registration_no_password_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_password_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -136,7 +136,7 @@ public class apptest{
 	}
 	
 	@Test(priority=6)
-	public void varify_registration_no_matching_password_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_matching_password_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -153,7 +153,7 @@ public class apptest{
 	}
 	
 	@Test(priority=7)
-	public void varify_registration_no_privacy_check_test() throws InterruptedException{
+	public void varify_registration_not_working_for_no_privacy_check_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -170,7 +170,7 @@ public class apptest{
 	}
 	
 	@Test(priority=8)
-	public void varify_registration_duplicate_email_test() throws InterruptedException{
+	public void varify_registration_not_working_for_duplicate_email_test() throws InterruptedException{
 		driver.get(url);
 		System.out.println("Link Opened");
 		driver.manage().window().maximize();
@@ -187,7 +187,7 @@ public class apptest{
 	}
 	
 	@Test(priority=9)
-	public void varify_registration_pos_test() throws InterruptedException{
+	public void varify_registration_working_for_possetive_test() throws InterruptedException{
 		System.out.println(url);
 		driver.get(url);
 		System.out.println("Link Opened");
@@ -212,7 +212,7 @@ public class apptest{
 	}
 	
 	@Test(priority=10)
-	public void login_test() throws InterruptedException{
+	public void varify_login_possetive_test() throws InterruptedException{
 		System.out.println(url);
 		driver.get(url);
 		System.out.println("Link Opened");

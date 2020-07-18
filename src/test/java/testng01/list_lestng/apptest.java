@@ -20,7 +20,7 @@ import page_demo.drop_down_page;
 import page_demo.file_upload_page;
 import page_demo.login_page;
 import page_demo.registration_page;
-
+//rakib hassan
 public class apptest{
 	
 	public WebDriver driver;
@@ -324,7 +324,7 @@ public class apptest{
 		home.click_add_to_cart_btn();
 		String add_status=home.add_status();
 		
-		Assert.assertEquals(add_status, "product");
+		Assert.assertEquals(add_status, product);
 	}
 	
 
